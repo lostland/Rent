@@ -8,8 +8,10 @@ import memoize from "memoizee";
 import connectPg from "connect-pg-simple";
 import { storage } from "./storage";
 
-if (!process.env.REPLIT_DOMAINS) {
-  throw new Error("Environment variable REPLIT_DOMAINS not provided");
+const replitDomains = process.env.REPLIT_DOMAINS;
+
+if (!replitDomains) {
+  console.warn("REPLIT_DOMAINS is not set. Replit authentication will be disabled.");
 }
 
 const getOidcConfig = memoize(
@@ -22,29 +24,43 @@ const getOidcConfig = memoize(
   { maxAge: 3600 * 1000 }
 );
 
-const landingDatabaseUrl = process.env.LANDING_DATABASE_URL;
-
-if (!landingDatabaseUrl) {
-  throw new Error("LANDING_DATABASE_URL must be set to configure session storage");
-}
-
 export function getSession() {
   const sessionTtl = 7 * 24 * 60 * 60 * 1000; // 1 week
-  const pgStore = connectPg(session);
-  const sessionStore = new pgStore({
-    conString: landingDatabaseUrl,
-    createTableIfMissing: false,
-    ttl: sessionTtl,
-    tableName: "sessions",
-  });
+  const landingDatabaseUrl = process.env.LANDING_DATABASE_URL;
+  let sessionStore: session.Store;
+
+  if (landingDatabaseUrl) {
+    const pgStore = connectPg(session);
+    sessionStore = new pgStore({
+      conString: landingDatabaseUrl,
+      createTableIfMissing: false,
+      ttl: sessionTtl,
+      tableName: "sessions",
+    });
+  } else {
+    console.warn(
+      "LANDING_DATABASE_URL is not set. Using in-memory session store for development.",
+    );
+    sessionStore = new session.MemoryStore();
+  }
+
+  const sessionSecret = process.env.SESSION_SECRET ?? "development-secret";
+  if (!process.env.SESSION_SECRET) {
+    console.warn(
+      "SESSION_SECRET is not set. Falling back to an insecure default for development.",
+    );
+  }
+
+  const secureCookies = process.env.NODE_ENV === "production";
+
   return session({
-    secret: process.env.SESSION_SECRET!,
+    secret: sessionSecret,
     store: sessionStore,
     resave: false,
     saveUninitialized: false,
     cookie: {
       httpOnly: true,
-      secure: true,
+      secure: secureCookies,
       maxAge: sessionTtl,
     },
   });
@@ -73,6 +89,10 @@ async function upsertUser(
 }
 
 export async function setupAuth(app: Express) {
+  if (!replitDomains) {
+    return;
+  }
+
   app.set("trust proxy", 1);
   app.use(getSession());
   app.use(passport.initialize());
@@ -90,8 +110,7 @@ export async function setupAuth(app: Express) {
     verified(null, user);
   };
 
-  for (const domain of process.env
-    .REPLIT_DOMAINS!.split(",")) {
+  for (const domain of replitDomains.split(",")) {
     const strategy = new Strategy(
       {
         name: `replitauth:${domain}`,

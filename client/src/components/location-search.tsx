@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
 import { MapPin, Search, X } from "lucide-react";
+import { loadNaverMapsScript } from "@/lib/naver-maps-loader";
 
 export interface LocationData {
   address: string;
@@ -48,23 +49,12 @@ export function LocationSearch({
 
   const initializeMap = async () => {
     try {
-      // Check if Naver Maps is already loaded
-      if (!window.naver || !window.naver.maps) {
-        // Load Naver Maps API
-        const response = await fetch('/api/naver/client-id');
-        const data = await response.json();
-        
-        await new Promise<void>((resolve, reject) => {
-          const script = document.createElement('script');
-          script.src = `https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId=${data.clientId}`;
-          script.async = true;
-          script.onload = () => resolve();
-          script.onerror = () => reject(new Error('Failed to load Naver Maps'));
-          document.head.appendChild(script);
-        });
-      }
+      await loadNaverMapsScript();
 
-      if (!mapRef.current || !window.naver?.maps) return;
+      if (!mapRef.current || !window.naver?.maps) {
+        setMapError('지도를 불러오는데 실패했습니다.');
+        return;
+      }
 
       const mapOptions = {
         center: value 
@@ -139,7 +129,11 @@ export function LocationSearch({
       setMapError(null);
     } catch (error) {
       console.error('Error initializing map:', error);
-      setMapError('지도를 불러오는데 실패했습니다.');
+      setMapError(
+        error instanceof Error
+          ? error.message
+          : '지도를 불러오는데 실패했습니다.',
+      );
     }
   };
 
