@@ -3,7 +3,10 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
 import { MapPin, Search, X } from "lucide-react";
-import { loadNaverMapsScript } from "@/lib/naver-maps-loader";
+import {
+  loadNaverMapsScript,
+  getNaverMapsScriptState,
+} from "@/lib/naver-maps-loader";
 
 export interface LocationData {
   address: string;
@@ -42,10 +45,22 @@ export function LocationSearch({
 
   // Initialize map when showMap becomes true
   useEffect(() => {
-    if (showMap && mapRef.current && !mapInstanceRef.current) {
-      initializeMap();
+    if (!showMap || !mapRef.current) {
+      return;
     }
-  }, [showMap]);
+
+    if (mapInstanceRef.current || mapError) {
+      return;
+    }
+
+    const { state, error } = getNaverMapsScriptState();
+    if (state === "failed" && error) {
+      setMapError(error.message);
+      return;
+    }
+
+    initializeMap();
+  }, [showMap, mapError]);
 
   const initializeMap = async () => {
     try {
@@ -135,6 +150,12 @@ export function LocationSearch({
           : '지도를 불러오는데 실패했습니다.',
       );
     }
+  };
+
+  const handleRetryMapLoad = () => {
+    // Allow another attempt to initialize the map when retrying
+    mapInstanceRef.current = null;
+    setMapError(null);
   };
 
   const addMarker = (lat: number, lng: number, title: string) => {
@@ -319,8 +340,11 @@ export function LocationSearch({
               <p className="text-xs text-gray-500">지도를 클릭하여 위치를 선택하세요</p>
             </div>
             {mapError ? (
-              <div className="h-64 flex items-center justify-center bg-gray-100 dark:bg-gray-800 rounded" data-testid="text-map-error">
-                <p className="text-sm text-gray-500">{mapError}</p>
+              <div className="h-64 flex flex-col items-center justify-center gap-3 bg-gray-100 dark:bg-gray-800 rounded" data-testid="text-map-error">
+                <p className="text-sm text-gray-500 text-center px-4">{mapError}</p>
+                <Button size="sm" onClick={handleRetryMapLoad} data-testid="button-retry-map">
+                  다시 시도
+                </Button>
               </div>
             ) : (
               <div 

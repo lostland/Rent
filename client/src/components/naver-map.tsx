@@ -1,5 +1,8 @@
 import { useEffect, useRef, useState } from "react";
-import { loadNaverMapsScript } from "@/lib/naver-maps-loader";
+import {
+  loadNaverMapsScript,
+  getNaverMapsScriptState,
+} from "@/lib/naver-maps-loader";
 
 // Declare naver global for TypeScript
 declare global {
@@ -51,6 +54,19 @@ export function NaverMap({width = "100%",
   // 1) 스크립트 '한 번만' 로드
   useEffect(() => {
     let cancelled = false;
+
+    const { state, error } = getNaverMapsScriptState();
+
+    if (state === "failed" && error) {
+      setLoadError(error.message);
+      return;
+    }
+
+    if (state === "loaded" && window.naver?.maps) {
+      setIsLoaded(true);
+      setLoadError(null);
+      return;
+    }
 
     loadNaverMapsScript()
       .then(() => {
