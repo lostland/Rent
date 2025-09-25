@@ -24,41 +24,130 @@ import {
   ShieldCheck,
   Sparkles,
 } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 import heroCar from "@assets/xw0MTtfRZ3rCjnBiosoX8_1758442035276.png";
+import highlightLineupImg from "@assets/careroom.png";
+import highlightConsultingImg from "@assets/waiting.png";
+import highlightCareImg from "@assets/laser.png";
+import fleetSedanImg from "@assets/re.png";
+import fleetSuvImg from "@assets/lift.png";
+import fleetSpecialtyImg from "@assets/anti.png";
 
-const highlights = [
+type MediaAsset =
+  | { type: "image"; src: string; alt?: string }
+  | { type: "video"; src: string; poster?: string; alt?: string };
+
+interface HighlightItem {
+  title: string;
+  description: string;
+  icon: LucideIcon;
+  media: MediaAsset;
+}
+
+interface FleetItem {
+  name: string;
+  detail: string;
+  tags: string[];
+  media: MediaAsset;
+}
+
+function CardMedia({
+  media,
+  overlayClassName = "bg-slate-950/60",
+}: {
+  media: MediaAsset;
+  overlayClassName?: string;
+}) {
+  return (
+    <div className="absolute inset-0">
+      {media.type === "video" ? (
+        <video
+          className="h-full w-full object-cover"
+          autoPlay
+          loop
+          muted
+          playsInline
+          poster={media.poster}
+          aria-hidden="true"
+        >
+          <source src={media.src} type="video/mp4" />
+        </video>
+      ) : (
+        <img
+          src={media.src}
+          alt={media.alt ?? ""}
+          className="h-full w-full object-cover"
+          aria-hidden={media.alt ? undefined : true}
+        />
+      )}
+      <div className={`pointer-events-none absolute inset-0 ${overlayClassName}`} aria-hidden="true" />
+    </div>
+  );
+}
+
+const highlights: HighlightItem[] = [
   {
     title: "프리미엄 차량 라인업",
     description: "벤츠, BMW, 제네시스 등 최신형 수입/국산 차량을 상황에 맞춰 추천해 드립니다.",
     icon: Sparkles,
+    media: {
+      type: "image",
+      src: highlightLineupImg,
+      alt: "프리미엄 차량 라운지",
+    },
   },
   {
     title: "맞춤 컨설팅",
     description: "출장/여행/비즈니스 목적에 따라 최적의 차량과 요금제를 설계해 드립니다.",
     icon: Navigation2,
+    media: {
+      type: "image",
+      src: highlightConsultingImg,
+      alt: "컨설팅을 위한 대기 공간",
+    },
   },
   {
     title: "365일 고객 케어",
     description: "배차부터 반납까지 담당 매니저가 실시간으로 안내해 드립니다.",
     icon: ShieldCheck,
+    media: {
+      type: "image",
+      src: highlightCareImg,
+      alt: "서비스 케어 장면",
+    },
   },
 ];
 
-const fleet = [
+const fleet: FleetItem[] = [
   {
     name: "Executive Sedan",
     detail: "비즈니스 미팅과 장거리 이동을 위한 안락한 세단",
     tags: ["E-Class", "G80", "5 Series"],
+    media: {
+      type: "image",
+      src: fleetSedanImg,
+      alt: "프리미엄 세단 차량",
+    },
   },
   {
     name: "Luxury SUV",
     detail: "패밀리 여행과 VIP 픽업에 최적화된 프리미엄 SUV",
     tags: ["GV80", "XC90", "X5"],
+    media: {
+      type: "image",
+      src: fleetSuvImg,
+      alt: "럭셔리 SUV 차량",
+    },
   },
   {
     name: "Specialty Fleet",
     detail: "웨딩카, 프로모션, 행사 전용으로 커스터마이징 가능한 차량",
     tags: ["AMG", "Convertible", "Sprinter"],
+    media: {
+      type: "image",
+      src: fleetSpecialtyImg,
+      alt: "스페셜 이벤트 차량",
+    },
   },
 ];
 
@@ -404,16 +493,19 @@ export default function Landing() {
                 {highlights.map((highlight, index) => (
                   <div
                     key={highlight.title}
-                    className="flex flex-col gap-4 rounded-2xl border border-white/10 bg-slate-950/40 p-6 backdrop-blur"
+                    className="relative overflow-hidden rounded-2xl border border-white/10 bg-slate-950/40 p-6 backdrop-blur"
                     data-animate
                     data-animate-delay={`${0.1 + index * 0.05}s`}
                   >
-                    <div className="flex h-12 w-12 items-center justify-center rounded-full bg-sky-500/15 text-sky-300">
-                      <highlight.icon className="h-6 w-6" />
-                    </div>
-                    <div>
-                      <h4 className="text-lg font-semibold text-white">{highlight.title}</h4>
-                      <p className="mt-2 text-sm leading-relaxed text-slate-300">{highlight.description}</p>
+                    <CardMedia media={highlight.media} overlayClassName="bg-slate-950/70" />
+                    <div className="relative z-10 flex flex-col gap-4">
+                      <div className="flex h-12 w-12 items-center justify-center rounded-full bg-sky-500/20 text-sky-200">
+                        <highlight.icon className="h-6 w-6" />
+                      </div>
+                      <div>
+                        <h4 className="text-lg font-semibold text-white">{highlight.title}</h4>
+                        <p className="mt-2 text-sm leading-relaxed text-slate-200">{highlight.description}</p>
+                      </div>
                     </div>
                   </div>
                 ))}
@@ -424,29 +516,32 @@ export default function Landing() {
               {fleet.map((item, index) => (
                 <div
                   key={item.name}
-                  className="rounded-3xl border border-white/10 bg-gradient-to-r from-white/10 via-white/5 to-transparent p-8 shadow-xl"
+                  className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-r from-white/10 via-white/5 to-transparent p-8 shadow-xl"
                   data-animate
                   data-animate-delay={`${0.1 + index * 0.05}s`}
                 >
-                  <div className="flex items-center justify-between gap-4">
-                    <div>
-                      <p className="text-xs uppercase tracking-[0.3em] text-slate-400">fleet</p>
-                      <h5 className="mt-2 text-2xl font-semibold text-white">{item.name}</h5>
+                  <CardMedia media={item.media} overlayClassName="bg-slate-950/65" />
+                  <div className="relative z-10">
+                    <div className="flex items-center justify-between gap-4">
+                      <div>
+                        <p className="text-xs uppercase tracking-[0.3em] text-slate-300">fleet</p>
+                        <h5 className="mt-2 text-2xl font-semibold text-white">{item.name}</h5>
+                      </div>
+                      <div className="flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-sky-200">
+                        <Sparkles className="h-4 w-4" /> curated
+                      </div>
                     </div>
-                    <div className="flex items-center gap-2 rounded-full border border-white/10 px-3 py-1 text-xs text-sky-200">
-                      <Sparkles className="h-4 w-4" /> curated
+                    <p className="mt-4 text-sm leading-relaxed text-slate-200">{item.detail}</p>
+                    <div className="mt-6 flex flex-wrap gap-2">
+                      {item.tags.map((tag) => (
+                        <span
+                          key={tag}
+                          className="rounded-full bg-white/10 px-3 py-1 text-xs font-medium text-slate-100"
+                        >
+                          {tag}
+                        </span>
+                      ))}
                     </div>
-                  </div>
-                  <p className="mt-4 text-sm leading-relaxed text-slate-200">{item.detail}</p>
-                  <div className="mt-6 flex flex-wrap gap-2">
-                    {item.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="rounded-full bg-white/10 px-3 py-1 text-xs font-medium text-slate-100"
-                      >
-                        {tag}
-                      </span>
-                    ))}
                   </div>
                 </div>
               ))}

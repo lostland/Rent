@@ -1,3 +1,5 @@
+import { useEffect, useRef } from "react";
+
 import { Button } from "@/components/ui/button";
 import { Calendar, Phone, MessageSquare } from "lucide-react";
 import clinicVideo from "@assets/clinic.mp4";
@@ -7,11 +9,48 @@ interface HeroSectionProps {
 }
 
 export function HeroSection({ onKakaoClick }: HeroSectionProps) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    video.muted = true;
+
+    const tryPlay = () =>
+      video.play().catch(() => {
+        // Autoplay policies may block playback until user interaction.
+      });
+
+    const handleUserInteraction = () => {
+      tryPlay();
+      window.removeEventListener("pointerdown", handleUserInteraction);
+    };
+
+    video.addEventListener("loadeddata", tryPlay, { once: true });
+
+    video
+      .play()
+      .catch(() => window.addEventListener("pointerdown", handleUserInteraction));
+
+    return () => {
+      window.removeEventListener("pointerdown", handleUserInteraction);
+    };
+  }, []);
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background Image */}
       <div className="absolute inset-0">
-        <video className="w-full h-full object-cover" autoPlay loop muted playsInline preload="metadata">
+        <video
+          ref={videoRef}
+          className="w-full h-full object-cover"
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="metadata"
+        >
           <source src={clinicVideo} type="video/mp4" />
         </video>
         <div className="absolute inset-0 bg-primary/80"></div>
