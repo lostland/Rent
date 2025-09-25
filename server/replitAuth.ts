@@ -22,11 +22,17 @@ const getOidcConfig = memoize(
   { maxAge: 3600 * 1000 }
 );
 
+const landingDatabaseUrl = process.env.LANDING_DATABASE_URL;
+
+if (!landingDatabaseUrl) {
+  throw new Error("LANDING_DATABASE_URL must be set to configure session storage");
+}
+
 export function getSession() {
   const sessionTtl = 7 * 24 * 60 * 60 * 1000; // 1 week
   const pgStore = connectPg(session);
   const sessionStore = new pgStore({
-    conString: process.env.DATABASE_URL,
+    conString: landingDatabaseUrl,
     createTableIfMissing: false,
     ttl: sessionTtl,
     tableName: "sessions",
