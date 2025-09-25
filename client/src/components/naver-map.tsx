@@ -1,5 +1,5 @@
-import { time } from "console";
 import { useEffect, useRef, useState } from "react";
+import { loadNaverMapsScript } from "@/lib/naver-maps-loader";
 
 // Declare naver global for TypeScript
 declare global {
@@ -32,37 +32,6 @@ interface NaverMapProps {
   className?: string;
   [key: string]: any; // Allow additional props like data-testid
 }
-
-
-  // --- Robust geocode helper with retries for flaky 500/invalid JSON ---
-  async function geocodeWithRetry(maps: any, query: string, attempts: number = 3, delayMs: number = 250): Promise<any | null> {
-    function once(): Promise<any | null> {
-      return new Promise((resolve) => {
-        try {
-          maps.Service.geocode({ query }, (status: any, response: any) => {
-            try {
-              if (status === maps.Service.Status.OK && response?.v2?.addresses?.length) {
-                resolve(response.v2.addresses[0]);
-              } else {
-                resolve(null);
-              }
-            } catch (_) {
-              resolve(null);
-            }
-          });
-        } catch (_) {
-          resolve(null);
-        }
-      });
-    }
-    for (let i = 0; i < attempts; i++) {
-      const res = await once();
-      if (res) return res;
-      if (i < attempts - 1) await new Promise(r => setTimeout(r, delayMs * (i + 1)));
-    }
-    return null;
-  }
-
 export function NaverMap({width = "100%",
   height = "400px",
   center = { lat: 37.5137, lng: 127.0982 }, // Default to Seoul coordinates
@@ -79,50 +48,31 @@ export function NaverMap({width = "100%",
 
   console.log('NaverMap: Rendering...');
 
-  useEffect(() => {
-    (window as any).navermap_authFailure = () => {
-      console.error('[NAVER] auth failure');
-      setLoadError('지도 인증에 실패했습니다. 키/도메인 설정을 확인해 주세요.');
-    };
-  }, []);
-
   // 1) 스크립트 '한 번만' 로드
   useEffect(() => {
-    if (window.naver?.maps) {
-      console.log('NaverMap: Already loaded!');
-      setIsLoaded(true);
-      return;
-    }
-    console.log('1--------------------');
+    let cancelled = false;
 
-    (window as any).initNaverMap = () => setIsLoaded(true);
-
-    // 이미 붙어있으면 재첨부 방지
-    if (document.getElementById('naver-maps-api-script')) return;
-
-    fetch('/api/naver/client-id')
-      .then(r => r.json())
-      .then(data => {
-        if (!data?.clientId) throw new Error('Missing clientId');
-        const script = document.createElement('script');
-        script.id = 'naver-maps-api-script';
-        script.src = `https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId=${data.clientId}&submodules=geocoder&callback=initNaverMap`;
-        script.async = true;
-        script.onerror = () => setLoadError('지도를 불러오는데 실패했습니다.');
-
-        console.log('[NAVER] origin=', window.location.origin);
-        console.log('[NAVER] referrer(meta)=', document.referrer);
-        console.log('[NAVER] src=', script.src);
-
-        document.head.appendChild(script);
+    loadNaverMapsScript()
+      .then(() => {
+        if (!cancelled) {
+          console.log('NaverMap: Already loaded!');
+          setIsLoaded(true);
+          setLoadError(null);
+        }
       })
-      .catch(() => setLoadError('지도 API 설정을 불러오는데 실패했습니다.'));
+      .catch((error) => {
+        if (!cancelled) {
+          console.error('[NAVER] load failure', error);
+          setLoadError(
+            error instanceof Error
+              ? error.message
+              : '지도를 불러오는데 실패했습니다.',
+          );
+        }
+      });
 
     return () => {
-      delete (window as any).initNaverMap;
-      // 스크립트는 보통 유지. 필요 시에만 제거
-      // const s = document.getElementById('naver-maps-api-script');
-      // if (s) s.remove();
+      cancelled = true;
     };
   }, []);
 
