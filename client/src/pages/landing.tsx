@@ -475,7 +475,7 @@ export default function Landing() {
         </section>
 
         <section className="py-20">
-          <div className="container mx-auto grid gap-16 px-4 md:grid-cols-[1.1fr_0.9fr]">
+          <div className="container mx-auto flex flex-col gap-16 px-4">
             <div className="space-y-8">
               <p className="text-sm uppercase tracking-[0.35em] text-sky-300">signature service</p>
               <h3 className="text-3xl font-semibold text-white md:text-4xl" data-animate>
