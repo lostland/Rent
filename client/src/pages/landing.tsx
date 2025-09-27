@@ -25,13 +25,13 @@ import {
   Sparkles,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
-import heroCar from "@assets/xw0MTtfRZ3rCjnBiosoX8_1758442035276.png";
-import highlightLineupImg from "@assets/careroom.png";
-import highlightConsultingImg from "@assets/waiting.png";
-import highlightCareImg from "@assets/laser.png";
-import fleetSedanImg from "@assets/re.png";
-import fleetSuvImg from "@assets/lift.png";
-import fleetSpecialtyImg from "@assets/anti.png";
+import heroCar from "@assets/1.jpg";
+import highlightLineupImg from "@assets/2.jpg";
+import highlightConsultingImg from "@assets/3.jpg";
+import highlightCareImg from "@assets/4.jpg";
+import fleetSedanImg from "@assets/5.jpg";
+import fleetSuvImg from "@assets/6.jpg";
+import fleetSpecialtyImg from "@assets/7.jpg";
 
 type MediaAsset =
   | { type: "image"; src: string; alt?: string }
