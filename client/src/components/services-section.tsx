@@ -66,11 +66,11 @@ export function ServicesSection() {
           {services.map((service, index) => (
             <Card
               key={index}
-              className="bg-card overflow-hidden shadow-xl hover:shadow-2xl transition-all animate-fade-in border border-border/50 backdrop-blur-sm"
+              className="animate-fade-in overflow-visible rounded-none border-none bg-transparent p-0 shadow-none transition-none sm:overflow-visible md:overflow-hidden md:rounded-[28px] md:border md:border-border/50 md:bg-card md:shadow-xl md:backdrop-blur-sm md:transition-all md:hover:shadow-2xl"
               data-testid={`card-service-${index}`}
             >
               {/* 카드 전체를 채우는 이미지 */}
-              <div className="w-full h-48 md:h-64">
+              <div className="w-full h-48 md:h-64 md:overflow-hidden md:rounded-t-[28px]">
                 {String(service.media).toLowerCase().endsWith(".mp4") ? (
                   <video className="w-full h-full object-cover" autoPlay loop muted playsInline preload="metadata">
                     <source src={service.media as any} type="video/mp4" />
@@ -80,7 +80,7 @@ export function ServicesSection() {
                 )}
               </div>
 
-              <CardContent className="p-6">
+              <CardContent className="px-0 py-6 md:px-6 md:pt-6">
                 <h4 className="text-xl font-bold mb-4">{service.title}</h4>
                 <p className="text-muted-foreground">{service.description}</p>
               </CardContent>
