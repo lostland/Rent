@@ -32,6 +32,10 @@ import highlightCareImg from "@assets/4.jpg";
 import fleetSedanImg from "@assets/5.jpg";
 import fleetSuvImg from "@assets/6.jpg";
 import fleetSpecialtyImg from "@assets/7.jpg";
+import stepBg1 from "@assets/9.jpg";
+import stepBg2 from "@assets/10.jpg";
+import stepBg3 from "@assets/11.jpg";
+import stepBg4 from "@assets/12.jpg";
 
 type MediaAsset =
   | { type: "image"; src: string; alt?: string }
@@ -156,21 +160,25 @@ const steps = [
     title: "상담 신청",
     description:
       "간단한 문의만 남겨도 담당 매니저가 즉시 연락을 드리고 이동 목적을 세부적으로 확인합니다. 고객의 일정, 동선, 동반 인원, 필요 서비스 등을 체크하여 가장 편안한 이동을 설계할 준비를 마칩니다.",
+    background: stepBg1,
   },
   {
     title: "맞춤 제안",
     description:
       "필요 일정과 목적에 맞춘 차량·기사·서비스 플랜을 제안하고, 예상 경로에 따른 소요 시간과 비용까지 투명하게 안내합니다. 고객이 원하는 경우 현장 실사를 통해 픽업 동선을 사전에 점검합니다.",
+    background: stepBg2,
   },
   {
     title: "안전 배차",
     description:
       "완벽한 점검을 마친 차량과 전문 드라이버가 약속된 장소로 배차되며, 실시간 위치 공유를 통해 고객이 대기 시간을 최소화할 수 있습니다. 모든 드라이버는 정기 안전 교육을 이수하고 다국어 의사소통도 지원합니다.",
+    background: stepBg3,
   },
   {
     title: "사후 케어",
     description:
       "이용 후 추가 일정이나 연장이 필요하면 즉시 이어서 지원하며, 차량 상태 보고와 다음 예약 일정 조율까지 한 번에 진행합니다. 장기 계약 고객에게는 전용 프로모션과 주기적인 서비스 점검을 제공합니다.",
+    background: stepBg4,
   },
 ];
 
@@ -424,9 +432,13 @@ export default function Landing() {
                   >
                     일정, 동선, 목적에 따라 가장 완벽한 이동 경험을 설계해 드립니다. 첫 문의부터 차량 반납까지 모든 과정을 전담 매니저가 케어하고, 공항 픽업·호텔 체크인·비즈니스 미팅 등 세부 동선까지 함께 점검하여 고객의 시간을 아껴 드립니다. 서울 곳곳의 파트너 시설과 연계된 특화 혜택으로 이동 이후 일정까지 연속성 있게 이어집니다.
                   </p>
-                  <div className="flex flex-col gap-3 sm:flex-row" data-animate data-animate-delay="0.15s">
+                  <div
+                    className="flex flex-col items-center justify-center gap-3 sm:flex-row"
+                    data-animate
+                    data-animate-delay="0.15s"
+                  >
                     <Button
-                      className="group flex items-center gap-2 rounded-full bg-sky-500 px-8 py-6 text-base font-semibold text-white transition hover:bg-sky-400"
+                      className="group flex h-14 w-full items-center justify-center gap-2 rounded-full bg-sky-500 px-8 text-base font-semibold text-white transition hover:bg-sky-400 sm:w-auto"
                       onClick={() => setIsDialogOpen(true)}
                     >
                       컨시어지 예약하기
@@ -434,7 +446,7 @@ export default function Landing() {
                     </Button>
                     <a
                       href="tel:02-123-4567"
-                      className="flex items-center justify-center gap-2 rounded-full bg-white/10 px-8 py-6 text-base font-semibold text-white transition hover:bg-white/20"
+                      className="flex h-14 w-full items-center justify-center gap-2 rounded-full bg-white/10 px-8 text-base font-semibold text-white transition hover:bg-white/20 sm:w-auto"
                     >
                       <PhoneCall className="h-5 w-5" /> 전화 상담
                     </a>
@@ -478,6 +490,7 @@ export default function Landing() {
                   전 차량 자차 손해 면책과 도착지별 기사 대기 서비스가 포함되어 있어 이동 중 발생할 수 있는 변수를 철저히 관리합니다.
                 </span>
               </div>
+              <div className="h-1 w-full max-w-2xl rounded-full bg-gradient-to-r from-transparent via-sky-400/80 to-transparent" aria-hidden="true" />
             </div>
           </div>
         </section>
@@ -559,16 +572,24 @@ export default function Landing() {
               {steps.map((step, index) => (
                 <article
                   key={step.title}
-                  className="space-y-4"
+                  className="relative overflow-hidden rounded-3xl border border-white/10 bg-slate-950/60 p-8 shadow-xl shadow-slate-950/40 transition hover:border-sky-400/60 hover:shadow-sky-900/40"
                   data-animate
                   data-animate-delay={`${0.05 + index * 0.08}s`}
                 >
-                  <div className="flex items-center gap-3 text-sm uppercase tracking-[0.3em] text-slate-300">
-                    <span>step {index + 1}</span>
-                    <CheckCircle2 className="h-5 w-5 text-sky-300" />
+                  <div
+                    className="absolute inset-0 bg-cover bg-center"
+                    style={{ backgroundImage: `url(${step.background})` }}
+                    aria-hidden="true"
+                  />
+                  <div className="absolute inset-0 bg-slate-950/75" aria-hidden="true" />
+                  <div className="relative space-y-4">
+                    <div className="flex items-center gap-3 text-sm uppercase tracking-[0.3em] text-slate-200">
+                      <span>step {index + 1}</span>
+                      <CheckCircle2 className="h-5 w-5 text-sky-300" />
+                    </div>
+                    <h4 className="text-2xl font-semibold text-white">{step.title}</h4>
+                    <p className="text-sm leading-relaxed text-slate-100">{step.description}</p>
                   </div>
-                  <h4 className="text-2xl font-semibold text-white">{step.title}</h4>
-                  <p className="text-sm leading-relaxed text-slate-200">{step.description}</p>
                 </article>
               ))}
             </div>
