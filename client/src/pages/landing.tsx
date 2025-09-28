@@ -76,7 +76,7 @@ function CardMedia({ media }: { media: MediaAsset }) {
     <img
       src={media.src}
       alt={media.alt ?? ""}
-      className="h-64 w-full object-cover md:h-80"
+      className="block h-64 w-full object-cover md:h-80"
       loading="lazy"
       aria-hidden={media.alt ? undefined : true}
     />

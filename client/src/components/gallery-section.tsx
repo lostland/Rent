@@ -94,7 +94,7 @@ export function GallerySection() {
                   <img
                     src={s.media as any}
                     alt={s.title}
-                    className="w-full h-[260px] md:h-[360px] object-cover"
+                    className="block h-[260px] w-full object-cover md:h-[360px]"
                     loading="lazy"
                   />
                 )}
