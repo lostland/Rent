@@ -59,7 +59,7 @@ function CardMedia({ media }: { media: MediaAsset }) {
   if (media.type === "video") {
     return (
       <video
-        className="h-64 w-full object-cover md:h-80"
+        className="aspect-[16/9] w-full object-cover"
         autoPlay
         loop
         muted
@@ -76,7 +76,7 @@ function CardMedia({ media }: { media: MediaAsset }) {
     <img
       src={media.src}
       alt={media.alt ?? ""}
-      className="block h-64 w-full object-cover md:h-80"
+      className="block aspect-[16/9] w-full object-cover"
       loading="lazy"
       aria-hidden={media.alt ? undefined : true}
     />
@@ -87,7 +87,7 @@ const highlights: HighlightItem[] = [
   {
     title: "프리미엄 차량 라인업",
     description:
-      "벤츠, BMW, 제네시스 등 최신형 수입·국산 차량을 목적과 이동 인원에 맞춰 세심하게 추천합니다. 모든 차량은 주행 전 상태 점검과 실내 살균을 완료하여 언제나 전용차처럼 깨끗한 컨디션을 유지합니다.",
+      "벤츠, BMW, 제네시스 등 최신형 수입·국산 차량을 목적과 이동 인원에 맞춰 세심하게 추천합니다. 모든 차량은 주행 전 상태 점검과 실내 살균을 완료하여 언제나 전용차처럼 깨끗한 컨디션을 유지합니다. 고객의 드레스 코드나 브랜드 이미지에 맞춘 컬러 코디네이션, 향기 연출까지 가능해 특별한 순간을 더욱 돋보이게 합니다.",
     icon: Sparkles,
     media: {
       type: "image",
@@ -98,7 +98,7 @@ const highlights: HighlightItem[] = [
   {
     title: "맞춤 컨설팅",
     description:
-      "출장, 여행, 비즈니스 등 상황별 이동 목적을 분석해 최적의 차량과 기사, 요금제를 설계합니다. 현장 동선과 예상 이동시간까지 고려한 세부 플랜을 제안해 한 번의 예약으로 모든 일정을 안정적으로 진행할 수 있습니다.",
+      "출장, 여행, 비즈니스 등 상황별 이동 목적을 분석해 최적의 차량과 기사, 요금제를 설계합니다. 현장 동선과 예상 이동시간까지 고려한 세부 플랜을 제안해 한 번의 예약으로 모든 일정을 안정적으로 진행할 수 있습니다. 필요 시 숙박 및 레스토랑 예약, 회의 공간 준비 등 연계 서비스도 함께 제공해 이동과 접객이 하나의 흐름으로 이어지도록 돕습니다.",
     icon: Navigation2,
     media: {
       type: "image",
@@ -109,7 +109,7 @@ const highlights: HighlightItem[] = [
   {
     title: "365일 고객 케어",
     description:
-      "배차부터 반납까지 전담 매니저가 실시간으로 동행하며 예상치 못한 일정 변경도 즉시 조율합니다. 24시간 케어 센터에서 돌발 상황을 모니터링해 고객이 이동 중에도 안심하고 본연의 일정에 집중할 수 있도록 지원합니다.",
+      "배차부터 반납까지 전담 매니저가 실시간으로 동행하며 예상치 못한 일정 변경도 즉시 조율합니다. 24시간 케어 센터에서 돌발 상황을 모니터링해 고객이 이동 중에도 안심하고 본연의 일정에 집중할 수 있도록 지원합니다. 이용 후에는 피드백을 바탕으로 맞춤 리포트를 제공하여 다음 예약 시 더 완성도 높은 이동 솔루션을 제안합니다.",
     icon: ShieldCheck,
     media: {
       type: "image",
@@ -123,7 +123,7 @@ const fleet: FleetItem[] = [
   {
     name: "Executive Sedan",
     detail:
-      "비즈니스 미팅과 장거리 이동을 위한 안락한 세단으로, 에어 서스펜션과 프리미엄 사운드 시스템이 탑재되어 장시간 이동에도 피로감을 줄여 줍니다. 내부 미니바와 충전 설비까지 준비하여 VIP 고객 응대에도 완벽합니다.",
+      "비즈니스 미팅과 장거리 이동을 위한 안락한 세단으로, 에어 서스펜션과 프리미엄 사운드 시스템이 탑재되어 장시간 이동에도 피로감을 줄여 줍니다. 내부 미니바와 충전 설비까지 준비하여 VIP 고객 응대에도 완벽합니다. 방음 처리된 실내 공간과 프라이버시 커튼, 개별 온도 조절 시스템으로 밀도 높은 업무 미팅을 이동 중에도 이어갈 수 있습니다.",
     tags: ["E-Class", "G80", "5 Series"],
     media: {
       type: "image",
@@ -134,7 +134,7 @@ const fleet: FleetItem[] = [
   {
     name: "Luxury SUV",
     detail:
-      "패밀리 여행과 VIP 픽업에 최적화된 프리미엄 SUV로, 넓은 적재 공간과 독립식 시트 배열을 통해 탑승객 모두가 여유롭게 휴식할 수 있습니다. 파노라마 루프와 엔터테인먼트 시스템이 장착되어 장거리 이동도 즐겁게 만듭니다.",
+      "패밀리 여행과 VIP 픽업에 최적화된 프리미엄 SUV로, 넓은 적재 공간과 독립식 시트 배열을 통해 탑승객 모두가 여유롭게 휴식할 수 있습니다. 파노라마 루프와 엔터테인먼트 시스템이 장착되어 장거리 이동도 즐겁게 만듭니다. 유아 시트와 반려동물 전용 키트도 옵션으로 제공되어 세대와 라이프스타일을 아우르는 이동 환경을 구성합니다.",
     tags: ["GV80", "XC90", "X5"],
     media: {
       type: "image",
@@ -145,7 +145,7 @@ const fleet: FleetItem[] = [
   {
     name: "Specialty Fleet",
     detail:
-      "웨딩카, 프로모션, 행사 전용으로 커스터마이징 가능한 차량으로, 색상 데코와 브랜드 래핑 등 목적에 맞춘 연출이 가능합니다. 전문 코디네이터가 사전 리허설까지 진행해 행사의 분위기를 완벽하게 완성합니다.",
+      "웨딩카, 프로모션, 행사 전용으로 커스터마이징 가능한 차량으로, 색상 데코와 브랜드 래핑 등 목적에 맞춘 연출이 가능합니다. 전문 코디네이터가 사전 리허설까지 진행해 행사의 분위기를 완벽하게 완성합니다. 퍼레이드 주행, 현장 음향, 포토존 구성까지 한 번에 대응해 브랜드 메시지가 자연스럽게 전달되도록 서포트합니다.",
     tags: ["AMG", "Convertible", "Sprinter"],
     media: {
       type: "image",
@@ -159,25 +159,25 @@ const steps = [
   {
     title: "상담 신청",
     description:
-      "간단한 문의만 남겨도 담당 매니저가 즉시 연락을 드리고 이동 목적을 세부적으로 확인합니다. 고객의 일정, 동선, 동반 인원, 필요 서비스 등을 체크하여 가장 편안한 이동을 설계할 준비를 마칩니다.",
+      "간단한 문의만 남겨도 담당 매니저가 즉시 연락을 드리고 이동 목적을 세부적으로 확인합니다. 고객의 일정, 동선, 동반 인원, 필요 서비스 등을 체크하여 가장 편안한 이동을 설계할 준비를 마칩니다. 고객이 참고할 수 있도록 예상 견적과 차량 라인업 브로슈어도 함께 전달해 의사 결정 시간을 최소화합니다.",
     background: stepBg1,
   },
   {
     title: "맞춤 제안",
     description:
-      "필요 일정과 목적에 맞춘 차량·기사·서비스 플랜을 제안하고, 예상 경로에 따른 소요 시간과 비용까지 투명하게 안내합니다. 고객이 원하는 경우 현장 실사를 통해 픽업 동선을 사전에 점검합니다.",
+      "필요 일정과 목적에 맞춘 차량·기사·서비스 플랜을 제안하고, 예상 경로에 따른 소요 시간과 비용까지 투명하게 안내합니다. 고객이 원하는 경우 현장 실사를 통해 픽업 동선을 사전에 점검합니다. 국제행사나 대규모 촬영처럼 복합적인 프로젝트에도 일정 관리 전문가가 투입되어 각 파트너사와의 협업을 조율합니다.",
     background: stepBg2,
   },
   {
     title: "안전 배차",
     description:
-      "완벽한 점검을 마친 차량과 전문 드라이버가 약속된 장소로 배차되며, 실시간 위치 공유를 통해 고객이 대기 시간을 최소화할 수 있습니다. 모든 드라이버는 정기 안전 교육을 이수하고 다국어 의사소통도 지원합니다.",
+      "완벽한 점검을 마친 차량과 전문 드라이버가 약속된 장소로 배차되며, 실시간 위치 공유를 통해 고객이 대기 시간을 최소화할 수 있습니다. 모든 드라이버는 정기 안전 교육을 이수하고 다국어 의사소통도 지원합니다. 차량 내부에는 공기질 모니터링 시스템과 비상 의료 키트를 비치하여 이동 중 발생할 수 있는 돌발 상황에 즉시 대응합니다.",
     background: stepBg3,
   },
   {
     title: "사후 케어",
     description:
-      "이용 후 추가 일정이나 연장이 필요하면 즉시 이어서 지원하며, 차량 상태 보고와 다음 예약 일정 조율까지 한 번에 진행합니다. 장기 계약 고객에게는 전용 프로모션과 주기적인 서비스 점검을 제공합니다.",
+      "이용 후 추가 일정이나 연장이 필요하면 즉시 이어서 지원하며, 차량 상태 보고와 다음 예약 일정 조율까지 한 번에 진행합니다. 장기 계약 고객에게는 전용 프로모션과 주기적인 서비스 점검을 제공합니다. 만족도 조사를 바탕으로 기사 평가와 서비스 업그레이드 제안서를 전달하여 지속적으로 품질을 개선합니다.",
     background: stepBg4,
   },
 ];
@@ -366,7 +366,7 @@ export default function Landing() {
       className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-slate-50"
     >
       <header className="fixed top-0 inset-x-0 z-40 bg-slate-950/80 backdrop-blur-xl">
-        <div className="container mx-auto flex items-center justify-between px-4 py-5">
+        <div className="mx-auto flex w-full items-center justify-between px-6 py-5 md:px-12">
           <div className="flex items-center gap-3" data-animate>
             <div className="flex h-12 w-12 items-center justify-center rounded-full bg-sky-500/20 text-sky-400">
               <Car className="h-6 w-6" />
@@ -404,12 +404,12 @@ export default function Landing() {
       <main className="pt-28 md:pt-32">
         <section className="relative overflow-hidden">
           <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(56,189,248,0.15),_transparent_60%)]" />
-          <div className="container mx-auto grid items-start gap-14 px-4 pb-24 pt-12">
+          <div className="mx-auto grid w-full items-start gap-14 px-6 pb-24 pt-12 md:px-12">
             <div className="space-y-10">
               <div
-                className="relative overflow-hidden rounded-3xl border border-white/10 bg-cover bg-center p-8 shadow-2xl shadow-sky-500/10 backdrop-blur-sm sm:p-10"
+                className="relative overflow-hidden bg-cover bg-center px-6 py-14 sm:px-10 sm:py-16"
                 style={{
-                  backgroundImage: `linear-gradient(135deg, rgba(15, 23, 42, 0.9), rgba(2, 6, 23, 0.72)), url(${heroCar})`,
+                  backgroundImage: `linear-gradient(135deg, rgba(15, 23, 42, 0.92), rgba(2, 6, 23, 0.78)), url(${heroCar})`,
                 }}
                 data-animate
               >
@@ -430,7 +430,7 @@ export default function Landing() {
                     data-animate
                     data-animate-delay="0.1s"
                   >
-                    일정, 동선, 목적에 따라 가장 완벽한 이동 경험을 설계해 드립니다. 첫 문의부터 차량 반납까지 모든 과정을 전담 매니저가 케어하고, 공항 픽업·호텔 체크인·비즈니스 미팅 등 세부 동선까지 함께 점검하여 고객의 시간을 아껴 드립니다. 서울 곳곳의 파트너 시설과 연계된 특화 혜택으로 이동 이후 일정까지 연속성 있게 이어집니다.
+                    일정, 동선, 목적에 따라 가장 완벽한 이동 경험을 설계해 드립니다. 첫 문의부터 차량 반납까지 모든 과정을 전담 매니저가 케어하고, 공항 픽업·호텔 체크인·비즈니스 미팅 등 세부 동선까지 함께 점검하여 고객의 시간을 아껴 드립니다. 서울 곳곳의 파트너 시설과 연계된 특화 혜택으로 이동 이후 일정까지 연속성 있게 이어집니다. 최신형 차량 라인업과 숙련된 기사 네트워크, 목적지와 연계된 맞춤 서비스까지 유기적으로 연결하여 단순한 이동을 넘어서는 고급 모빌리티 경험을 제공합니다.
                   </p>
                   <div
                     className="flex flex-col items-center justify-center gap-3 sm:flex-row"
@@ -452,7 +452,7 @@ export default function Landing() {
                     </a>
                   </div>
                   <p className="text-sm leading-relaxed text-slate-100/90" data-animate data-animate-delay="0.18s">
-                    고객 전용 앱을 통해 실시간 배차 현황과 기사 정보를 확인하고 필요한 서류를 간편하게 업로드할 수 있습니다. 예약 변경이 발생해도 즉시 알림으로 안내받아 이동 계획을 유연하게 조정할 수 있습니다.
+                    고객 전용 앱을 통해 실시간 배차 현황과 기사 정보를 확인하고 필요한 서류를 간편하게 업로드할 수 있습니다. 예약 변경이 발생해도 즉시 알림으로 안내받아 이동 계획을 유연하게 조정할 수 있습니다. 장기 계약 고객에게는 기사 프로필 관리, 자주 방문하는 목적지 자동 등록, 공항 VIP 라운지 동반 등 다양한 부가 혜택이 제공되어 한층 여유로운 여행과 비즈니스 일정이 완성됩니다.
                   </p>
                 </div>
               </div>
@@ -481,13 +481,13 @@ export default function Landing() {
               <div className="flex items-center gap-3 text-base text-slate-200">
                 <Gauge className="h-5 w-5 text-sky-300" />
                 <span>
-                  월간 무제한 주행 옵션과 공항 전용 패스트트랙을 함께 제공하여 장기 이용 고객의 이동 시간을 대폭 단축합니다.
+                  월간 무제한 주행 옵션과 공항 전용 패스트트랙을 함께 제공하여 장기 이용 고객의 이동 시간을 대폭 단축합니다. 필요 시 여행 스케줄 관리팀이 일정을 통합 관리하며, 이동 간격에 맞춘 휴식 공간 예약까지 제안합니다.
                 </span>
               </div>
               <div className="flex items-center gap-3 text-base text-slate-200">
                 <ShieldCheck className="h-5 w-5 text-sky-300" />
                 <span>
-                  전 차량 자차 손해 면책과 도착지별 기사 대기 서비스가 포함되어 있어 이동 중 발생할 수 있는 변수를 철저히 관리합니다.
+                  전 차량 자차 손해 면책과 도착지별 기사 대기 서비스가 포함되어 있어 이동 중 발생할 수 있는 변수를 철저히 관리합니다. 고객의 보안 등급에 따라 비공개 출입 동선 설계와 현장 보안 인력 연계도 지원합니다.
                 </span>
               </div>
               <div className="h-1 w-full max-w-2xl rounded-full bg-gradient-to-r from-transparent via-sky-400/80 to-transparent" aria-hidden="true" />
@@ -496,14 +496,14 @@ export default function Landing() {
         </section>
 
         <section className="py-20">
-          <div className="container mx-auto flex flex-col gap-16 px-4">
+          <div className="mx-auto flex w-full flex-col gap-16 px-6 md:px-12">
             <div className="space-y-8">
               <p className="text-sm uppercase tracking-[0.35em] text-sky-300">signature service</p>
               <h3 className="text-3xl font-semibold text-white md:text-4xl" data-animate>
                 서울 전 지역 프리미엄 맞춤 렌탈 & 리무진 컨시어지
               </h3>
               <p className="text-base leading-relaxed text-slate-200" data-animate data-animate-delay="0.05s">
-                수입차 단기 렌트부터 VIP 의전, 웨딩 차량까지 목적별 이동 솔루션을 제공해 드립니다. 전담 매니저가 이동 동선에 맞춰 휴게 지점과 체크인 시간을 조율하고, 필요 시 통역과 보안 인력까지 연계하여 완벽한 토탈 케어를 제공합니다.
+                수입차 단기 렌트부터 VIP 의전, 웨딩 차량까지 목적별 이동 솔루션을 제공해 드립니다. 전담 매니저가 이동 동선에 맞춰 휴게 지점과 체크인 시간을 조율하고, 필요 시 통역과 보안 인력까지 연계하여 완벽한 토탈 케어를 제공합니다. 고객의 브랜드 캠페인이나 행사 콘셉트에 맞춘 커스터마이징 제안도 함께 드려 서울에서의 모든 순간이 자연스럽게 연결되도록 돕습니다.
               </p>
               <div className="space-y-12">
                 {highlights.map((highlight, index) => (
@@ -558,21 +558,21 @@ export default function Landing() {
         </section>
 
         <section id="process" className="py-24">
-          <div className="container mx-auto px-4">
+          <div className="mx-auto w-full px-6 md:px-12">
             <div className="mb-12 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
               <div data-animate>
                 <p className="text-sm uppercase tracking-[0.35em] text-sky-300">how it works</p>
                 <h3 className="mt-4 text-3xl font-semibold text-white md:text-4xl">4단계로 완성되는 프리미엄 예약 프로세스</h3>
               </div>
               <p className="text-sm leading-relaxed text-slate-200" data-animate data-animate-delay="0.1s">
-                <CalendarRange className="mr-2 inline h-4 w-4 text-sky-300" aria-hidden="true" /> 모든 상담은 24시간 이내 응답해 드리며, 야간에도 긴급 배차 전담팀이 상시 대기하고 있습니다.
+                <CalendarRange className="mr-2 inline h-4 w-4 text-sky-300" aria-hidden="true" /> 모든 상담은 24시간 이내 응답해 드리며, 야간에도 긴급 배차 전담팀이 상시 대기하고 있습니다. 예약 진행 상황은 모바일 알림으로 투명하게 공유되어 고객이 언제든 진행 상황을 확인할 수 있습니다.
               </p>
             </div>
             <div className="grid gap-10">
               {steps.map((step, index) => (
                 <article
                   key={step.title}
-                  className="relative overflow-hidden rounded-3xl border border-white/10 bg-slate-950/60 p-8 shadow-xl shadow-slate-950/40 transition hover:border-sky-400/60 hover:shadow-sky-900/40"
+                  className="relative overflow-hidden bg-slate-950/70 px-8 py-12"
                   data-animate
                   data-animate-delay={`${0.05 + index * 0.08}s`}
                 >
@@ -597,12 +597,12 @@ export default function Landing() {
         </section>
 
         <section className="py-20">
-          <div className="container mx-auto grid gap-12 px-4 md:grid-cols-[0.95fr_1.05fr]">
+          <div className="mx-auto grid w-full gap-12 px-6 md:grid-cols-[0.95fr_1.05fr] md:px-12">
             <div className="space-y-6" data-animate>
               <p className="text-sm uppercase tracking-[0.35em] text-sky-300">client stories</p>
               <h3 className="text-3xl font-semibold text-white md:text-4xl">고객이 말하는 서울 프리미엄 렌트</h3>
               <p className="text-sm leading-relaxed text-slate-200">
-                반복 이용 고객들의 신뢰로 성장한 프리미엄 렌탈 서비스. 목적에 맞춘 차량, 매너 있는 드라이버, 그리고 전담 매니저의 섬세한 케어까지 경험해 보세요. 예약 이후에도 만족도 모니터링을 이어가며 더 나은 이동 환경을 제안합니다.
+                반복 이용 고객들의 신뢰로 성장한 프리미엄 렌탈 서비스. 목적에 맞춘 차량, 매너 있는 드라이버, 그리고 전담 매니저의 섬세한 케어까지 경험해 보세요. 예약 이후에도 만족도 모니터링을 이어가며 더 나은 이동 환경을 제안합니다. 고객이 원하는 콘텐츠 촬영, 미팅 준비, 휴식 지원까지 여유롭게 연결되는 서울만의 럭셔리 라이프스타일을 만나볼 수 있습니다.
               </p>
               <div data-animate data-animate-delay="0.05s">
                 <p className="text-xs uppercase tracking-[0.35em] text-sky-300">real voice</p>
@@ -635,7 +635,7 @@ export default function Landing() {
         </section>
 
         <section id="contact" className="py-24">
-          <div className="container mx-auto grid gap-16 px-4 md:grid-cols-[1fr_1fr]">
+          <div className="mx-auto grid w-full gap-16 px-6 md:grid-cols-[1fr_1fr] md:px-12">
             <div className="space-y-8" data-animate>
               <p className="text-sm uppercase tracking-[0.35em] text-sky-300">contact concierge</p>
               <h3 className="text-3xl font-semibold text-white md:text-4xl">
@@ -670,7 +670,7 @@ export default function Landing() {
               <div className="space-y-6" data-animate data-animate-delay="0.08s">
                 <h4 className="text-2xl font-semibold text-white">컨시어지 상담 신청</h4>
                 <p className="text-sm leading-relaxed text-slate-200">
-                  아래 버튼을 클릭하시면 빠른 상담 전화를 도와드립니다. 필요 시 카카오톡, 이메일 등 원하는 채널로 이어서 상담하며, 해외 고객을 위한 통역 서비스도 함께 지원합니다.
+                  아래 버튼을 클릭하시면 빠른 상담 전화를 도와드립니다. 필요 시 카카오톡, 이메일 등 원하는 채널로 이어서 상담하며, 해외 고객을 위한 통역 서비스도 함께 지원합니다. 상담 일정이 확정되면 맞춤 체크리스트와 예상 이동 시나리오를 먼저 공유하여 고객이 준비해야 할 사항을 명확히 파악할 수 있습니다.
                 </p>
                 <div className="grid gap-3">
                   <Button
@@ -697,7 +697,7 @@ export default function Landing() {
       </main>
 
       <footer className="bg-slate-950/80 py-8 text-xs text-slate-500">
-        <div className="container mx-auto flex flex-col items-center justify-between gap-4 px-4 md:flex-row">
+        <div className="mx-auto flex w-full flex-col items-center justify-between gap-4 px-6 md:flex-row md:px-12">
           <p>ⓒ {new Date().getFullYear()} Seoul Premium Rent. All Rights Reserved.</p>
           <div className="flex gap-6">
             <span>사업자등록번호 123-45-67890</span>
