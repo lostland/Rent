@@ -56,30 +56,37 @@ interface FleetItem {
 }
 
 function CardMedia({ media }: { media: MediaAsset }) {
+  const commonClasses = "block aspect-[16/9] w-full object-cover";
+  const wrapperClass = "full-bleed";
+
   if (media.type === "video") {
     return (
-      <video
-        className="aspect-[16/9] w-full object-cover"
-        autoPlay
-        loop
-        muted
-        playsInline
-        poster={media.poster}
-        aria-hidden="true"
-      >
-        <source src={media.src} type="video/mp4" />
-      </video>
+      <div className={wrapperClass}>
+        <video
+          className={commonClasses}
+          autoPlay
+          loop
+          muted
+          playsInline
+          poster={media.poster}
+          aria-hidden="true"
+        >
+          <source src={media.src} type="video/mp4" />
+        </video>
+      </div>
     );
   }
 
   return (
-    <img
-      src={media.src}
-      alt={media.alt ?? ""}
-      className="block aspect-[16/9] w-full object-cover"
-      loading="lazy"
-      aria-hidden={media.alt ? undefined : true}
-    />
+    <div className={wrapperClass}>
+      <img
+        src={media.src}
+        alt={media.alt ?? ""}
+        className={commonClasses}
+        loading="lazy"
+        aria-hidden={media.alt ? undefined : true}
+      />
+    </div>
   );
 }
 
