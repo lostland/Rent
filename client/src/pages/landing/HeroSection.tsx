@@ -76,7 +76,7 @@ export function HeroSection({ onOpenDialog }: HeroSectionProps) {
           <div
             className="relative -mx-6 overflow-hidden bg-cover bg-center px-6 py-14 sm:px-10 sm:py-16 md:-mx-12"
             style={{
-              backgroundImage: `linear-gradient(135deg, rgba(15, 23, 42, 0.92), rgba(2, 6, 23, 0.78)), url(${heroCar})`,
+              backgroundImage: `linear-gradient(135deg, rgba(15, 23, 42, 0.85), rgba(2, 6, 23, 0.68)), url(${heroCar})`,
             }}
             data-animate
           >
