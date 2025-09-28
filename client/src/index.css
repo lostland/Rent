@@ -126,6 +126,16 @@
     animation: typing-blink 1s steps(2, start) infinite;
     vertical-align: bottom;
   }
+
+  .full-bleed {
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    width: 100vw;
+    max-width: none;
+  }
 }
 
 @keyframes typing-blink {
