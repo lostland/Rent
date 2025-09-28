@@ -46,7 +46,7 @@ export function ProcessSection() {
             <CalendarRange className="mr-2 inline h-4 w-4 text-sky-300" aria-hidden="true" /> 모든 상담은 24시간 이내 응답해 드리며, 야간에도 긴급 배차 전담팀이 상시 대기하고 있습니다. 예약 진행 상황은 모바일 알림으로 투명하게 공유되어 고객이 언제든 진행 상황을 확인할 수 있습니다.
           </p>
         </div>
-        <div className="grid gap-10">
+        <div className="grid gap-10 -mx-6 md:-mx-12">
           {steps.map((step, index) => (
             <article
               key={step.title}
