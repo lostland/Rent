@@ -139,7 +139,7 @@ const fleet: FleetItem[] = [
 
 export function SignatureSection() {
   return (
-    <section className="py-20">
+    <section className="py-0">
       <div className="mx-auto flex w-full flex-col gap-16 px-6 md:px-12">
         <div className="space-y-8">
           <p className="text-sm uppercase tracking-[0.35em] text-sky-300">signature service</p>

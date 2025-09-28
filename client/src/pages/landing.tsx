@@ -102,7 +102,7 @@ export default function Landing() {
   return (
     <div ref={pageRef} className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-slate-50">
       <LandingHeader onContactClick={openDialog} />
-      <main className="pt-28 md:pt-32">
+      <main className="pt-12 md:pt-16">
         <HeroSection onOpenDialog={openDialog} />
         <SignatureSection />
         <ProcessSection />

@@ -101,7 +101,7 @@ export function HeroSection({ onOpenDialog }: HeroSectionProps) {
                 </Button>
                 <a
                   href="tel:02-123-4567"
-                  className="flex h-14 w-full items-center justify-center gap-2 rounded-full bg-white/10 px-8 text-base font-semibold text-white transition hover:bg-white/20 sm:w-auto"
+                  className="flex h-14 w-full items-center justify-center gap-2 rounded-full bg-white/50 px-8 text-base font-semibold text-white transition hover:bg-white/20 sm:w-auto"
                 >
                   <PhoneCall className="h-5 w-5" /> 전화 상담
                 </a>
