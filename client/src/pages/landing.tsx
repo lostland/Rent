@@ -478,13 +478,13 @@ export default function Landing() {
                 className="h-1 w-full max-w-2xl rounded-full bg-gradient-to-r from-transparent via-sky-400/80 to-transparent"
                 aria-hidden="true"
               />
-              <div className="flex items-center gap-3 text-sm text-slate-200">
+              <div className="flex items-center gap-3 text-base text-slate-200">
                 <Gauge className="h-5 w-5 text-sky-300" />
                 <span>
                   월간 무제한 주행 옵션과 공항 전용 패스트트랙을 함께 제공하여 장기 이용 고객의 이동 시간을 대폭 단축합니다.
                 </span>
               </div>
-              <div className="flex items-center gap-3 text-sm text-slate-200">
+              <div className="flex items-center gap-3 text-base text-slate-200">
                 <ShieldCheck className="h-5 w-5 text-sky-300" />
                 <span>
                   전 차량 자차 손해 면책과 도착지별 기사 대기 서비스가 포함되어 있어 이동 중 발생할 수 있는 변수를 철저히 관리합니다.
@@ -568,7 +568,7 @@ export default function Landing() {
                 <CalendarRange className="mr-2 inline h-4 w-4 text-sky-300" aria-hidden="true" /> 모든 상담은 24시간 이내 응답해 드리며, 야간에도 긴급 배차 전담팀이 상시 대기하고 있습니다.
               </p>
             </div>
-            <div className="grid gap-10 md:grid-cols-2">
+            <div className="grid gap-10">
               {steps.map((step, index) => (
                 <article
                   key={step.title}
