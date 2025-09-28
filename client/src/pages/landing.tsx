@@ -398,42 +398,52 @@ export default function Landing() {
           <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(56,189,248,0.15),_transparent_60%)]" />
           <div className="container mx-auto grid items-start gap-14 px-4 pb-24 pt-12">
             <div className="space-y-10">
-              <p className="text-xs uppercase tracking-[0.35em] text-sky-300" data-animate>
-                tailored luxury
-              </p>
-              <h2
-                className="text-4xl font-semibold leading-[1.15] text-white md:text-6xl"
+              <div
+                className="relative overflow-hidden rounded-3xl border border-white/10 bg-cover bg-center p-8 shadow-2xl shadow-sky-500/10 backdrop-blur-sm sm:p-10"
+                style={{
+                  backgroundImage: `linear-gradient(135deg, rgba(15, 23, 42, 0.9), rgba(2, 6, 23, 0.72)), url(${heroCar})`,
+                }}
                 data-animate
-                data-animate-delay="0.05s"
               >
-                맞춤 컨설팅으로 완성하는<br />
-                <span className="text-sky-400">프리미엄 차량 렌탈 서비스</span>
-              </h2>
-              <p
-                className="text-base leading-relaxed text-slate-200 md:text-lg"
-                data-animate
-                data-animate-delay="0.1s"
-              >
-                일정, 동선, 목적에 따라 가장 완벽한 이동 경험을 설계해 드립니다. 첫 문의부터 차량 반납까지 모든 과정을 전담 매니저가 케어하고, 공항 픽업·호텔 체크인·비즈니스 미팅 등 세부 동선까지 함께 점검하여 고객의 시간을 아껴 드립니다. 서울 곳곳의 파트너 시설과 연계된 특화 혜택으로 이동 이후 일정까지 연속성 있게 이어집니다.
-              </p>
-              <div className="flex flex-col gap-3 sm:flex-row" data-animate data-animate-delay="0.15s">
-                <Button
-                  className="group flex items-center gap-2 rounded-full bg-sky-500 px-8 py-6 text-base font-semibold text-white transition hover:bg-sky-400"
-                  onClick={() => setIsDialogOpen(true)}
-                >
-                  컨시어지 예약하기
-                  <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
-                </Button>
-                <a
-                  href="tel:02-123-4567"
-                  className="flex items-center justify-center gap-2 rounded-full bg-white/10 px-8 py-6 text-base font-semibold text-white transition hover:bg-white/20"
-                >
-                  <PhoneCall className="h-5 w-5" /> 전화 상담
-                </a>
+                <div className="relative space-y-8">
+                  <p className="text-xs uppercase tracking-[0.35em] text-sky-200" data-animate>
+                    tailored luxury
+                  </p>
+                  <h2
+                    className="text-4xl font-semibold leading-[1.15] text-white md:text-6xl"
+                    data-animate
+                    data-animate-delay="0.05s"
+                  >
+                    맞춤 컨설팅으로 완성하는<br />
+                    <span className="text-sky-300">프리미엄 차량 렌탈 서비스</span>
+                  </h2>
+                  <p
+                    className="text-base leading-relaxed text-slate-100 md:text-lg"
+                    data-animate
+                    data-animate-delay="0.1s"
+                  >
+                    일정, 동선, 목적에 따라 가장 완벽한 이동 경험을 설계해 드립니다. 첫 문의부터 차량 반납까지 모든 과정을 전담 매니저가 케어하고, 공항 픽업·호텔 체크인·비즈니스 미팅 등 세부 동선까지 함께 점검하여 고객의 시간을 아껴 드립니다. 서울 곳곳의 파트너 시설과 연계된 특화 혜택으로 이동 이후 일정까지 연속성 있게 이어집니다.
+                  </p>
+                  <div className="flex flex-col gap-3 sm:flex-row" data-animate data-animate-delay="0.15s">
+                    <Button
+                      className="group flex items-center gap-2 rounded-full bg-sky-500 px-8 py-6 text-base font-semibold text-white transition hover:bg-sky-400"
+                      onClick={() => setIsDialogOpen(true)}
+                    >
+                      컨시어지 예약하기
+                      <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
+                    </Button>
+                    <a
+                      href="tel:02-123-4567"
+                      className="flex items-center justify-center gap-2 rounded-full bg-white/10 px-8 py-6 text-base font-semibold text-white transition hover:bg-white/20"
+                    >
+                      <PhoneCall className="h-5 w-5" /> 전화 상담
+                    </a>
+                  </div>
+                  <p className="text-sm leading-relaxed text-slate-100/90" data-animate data-animate-delay="0.18s">
+                    고객 전용 앱을 통해 실시간 배차 현황과 기사 정보를 확인하고 필요한 서류를 간편하게 업로드할 수 있습니다. 예약 변경이 발생해도 즉시 알림으로 안내받아 이동 계획을 유연하게 조정할 수 있습니다.
+                  </p>
+                </div>
               </div>
-              <p className="text-sm leading-relaxed text-slate-300" data-animate data-animate-delay="0.18s">
-                고객 전용 앱을 통해 실시간 배차 현황과 기사 정보를 확인하고 필요한 서류를 간편하게 업로드할 수 있습니다. 예약 변경이 발생해도 즉시 알림으로 안내받아 이동 계획을 유연하게 조정할 수 있습니다.
-              </p>
               <div className="grid gap-6 md:grid-cols-3" ref={statsRef}>
                 {statsData.map((stat, index) => (
                   <div
@@ -451,12 +461,10 @@ export default function Landing() {
                 ))}
               </div>
             </div>
-
             <div className="space-y-6" data-animate data-animate-delay="0.25s">
-              <img
-                src={heroCar}
-                alt="프리미엄 렌터카"
-                className="w-full max-w-2xl object-cover"
+              <div
+                className="h-1 w-full max-w-2xl rounded-full bg-gradient-to-r from-transparent via-sky-400/80 to-transparent"
+                aria-hidden="true"
               />
               <div className="flex items-center gap-3 text-sm text-slate-200">
                 <Gauge className="h-5 w-5 text-sky-300" />
