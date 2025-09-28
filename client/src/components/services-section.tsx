@@ -76,7 +76,11 @@ export function ServicesSection() {
                     <source src={service.media as any} type="video/mp4" />
                   </video>
                 ) : (
-                  <img src={service.media as any} alt={service.title} className="w-full h-full object-cover" />
+                  <img
+                    src={service.media as any}
+                    alt={service.title}
+                    className="block h-full w-full object-cover"
+                  />
                 )}
               </div>
 
