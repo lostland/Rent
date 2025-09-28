@@ -24,7 +24,7 @@ export function useScrollReveal(
     selector = "[data-animate]",
     threshold = 0.2,
     rootMargin = "0px",
-    once = true,
+    once = false,
     dependencies = [],
   }: UseScrollRevealOptions = {},
 ) {
