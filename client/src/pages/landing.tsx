@@ -1,8 +1,9 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { useLocation } from "wouter";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { useToast } from "@/hooks/use-toast";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { apiRequest } from "@/lib/queryClient";
 
 import { LandingHeader } from "./landing/LandingHeader";
@@ -47,33 +48,7 @@ export default function Landing() {
     },
   });
 
-  useEffect(() => {
-    const container = pageRef.current;
-    const elements = container?.querySelectorAll<HTMLElement>("[data-animate]");
-    if (!elements?.length) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("is-visible");
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.2 },
-    );
-
-    elements.forEach((el) => {
-      const delay = el.dataset.animateDelay;
-      if (delay) {
-        el.style.transitionDelay = delay;
-      }
-      observer.observe(el);
-    });
-
-    return () => observer.disconnect();
-  }, []);
+  useScrollReveal(pageRef);
 
   const handleFormChange = (field: keyof typeof formData, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
