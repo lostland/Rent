@@ -175,7 +175,7 @@ const steps = [
 ];
 
 const statsData = [
-  { label: "연간 배차 건수", value: 12000, suffix: "+" },
+  { label: "연간 배차 건수", value: 2700, suffix: "+" },
   { label: "재이용 고객 비율", value: 92, suffix: "%" },
   { label: "전담 매니저", value: 24, suffix: "h" },
 ];
@@ -396,7 +396,7 @@ export default function Landing() {
       <main className="pt-28 md:pt-32">
         <section className="relative overflow-hidden">
           <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(56,189,248,0.15),_transparent_60%)]" />
-          <div className="container mx-auto grid items-start gap-14 px-4 pb-24 pt-12 md:grid-cols-[1.05fr_0.95fr]">
+          <div className="container mx-auto grid items-start gap-14 px-4 pb-24 pt-12">
             <div className="space-y-10">
               <p className="text-xs uppercase tracking-[0.35em] text-sky-300" data-animate>
                 tailored luxury
