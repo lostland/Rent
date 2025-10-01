@@ -88,8 +88,19 @@ export function HeroSection({ onOpenDialog }: HeroSectionProps) {
                 맞춤 컨설팅으로 완성하는<br />
                 <span className="text-sky-300">프리미엄 차량 렌탈 서비스</span>
               </h2>
-              <p className="text-base leading-relaxed text-slate-100 md:text-lg" data-animate data-animate-delay="0.1s">
+              <p
+                className="hidden text-base leading-relaxed text-slate-100 md:block md:text-lg"
+                data-animate
+                data-animate-delay="0.1s"
+              >
                 일정, 동선, 목적에 따라 가장 완벽한 이동 경험을 설계해 드립니다. 첫 문의부터 차량 반납까지 모든 과정을 전담 매니저가 케어하고, 공항 픽업·호텔 체크인·비즈니스 미팅 등 세부 동선까지 함께 점검하여 고객의 시간을 아껴 드립니다. 서울 곳곳의 파트너 시설과 연계된 특화 혜택으로 이동 이후 일정까지 연속성 있게 이어집니다. 최신형 차량 라인업과 숙련된 기사 네트워크, 목적지와 연계된 맞춤 서비스까지 유기적으로 연결하여 단순한 이동을 넘어서는 고급 모빌리티 경험을 제공합니다.
+              </p>
+              <p
+                className="text-base leading-relaxed text-slate-100 md:hidden"
+                data-animate
+                data-animate-delay="0.1s"
+              >
+                맞춤 컨설팅으로 문의부터 반납까지 전담 매니저가 케어하며, 파트너 혜택과 최신 차량 네트워크로 일정 전체를 자연스럽게 이어 드립니다.
               </p>
               <div className="flex flex-col items-center justify-center gap-3 sm:flex-row" data-animate data-animate-delay="0.15s">
                 <Button
@@ -106,8 +117,19 @@ export function HeroSection({ onOpenDialog }: HeroSectionProps) {
                   <PhoneCall className="h-5 w-5" /> 전화 상담
                 </a>
               </div>
-              <p className="text-sm leading-relaxed text-slate-100/90" data-animate data-animate-delay="0.18s">
+              <p
+                className="hidden text-sm leading-relaxed text-slate-100/90 md:block"
+                data-animate
+                data-animate-delay="0.18s"
+              >
                 고객 전용 앱을 통해 실시간 배차 현황과 기사 정보를 확인하고 필요한 서류를 간편하게 업로드할 수 있습니다. 예약 변경이 발생해도 즉시 알림으로 안내받아 이동 계획을 유연하게 조정할 수 있습니다. 장기 계약 고객에게는 기사 프로필 관리, 자주 방문하는 목적지 자동 등록, 공항 VIP 라운지 동반 등 다양한 부가 혜택이 제공되어 한층 여유로운 여행과 비즈니스 일정이 완성됩니다.
+              </p>
+              <p
+                className="text-sm leading-relaxed text-slate-100/90 md:hidden"
+                data-animate
+                data-animate-delay="0.18s"
+              >
+                전용 앱에서 배차와 기사 정보를 즉시 확인하고 변경 알림을 받을 수 있으며, 장기 고객에게는 기사 관리와 공항 VIP 라운지 등 프리미엄 혜택을 제공합니다.
               </p>
             </div>
           </div>
